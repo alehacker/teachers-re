@@ -107,3 +107,23 @@ a {
   #logout-form button {
     width: 120px;
   }
+
+  .other-buttons{
+    background: #7f43e6;
+    border: 1px solid #8f43e6;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    padding: 8px 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: 0.3s ease background;
+    width: 15%;
+  }
+  .other-buttons a {
+    color: #f2f0f5;
+    text-decoration: none;
+    font-size: 1em;
+  }
