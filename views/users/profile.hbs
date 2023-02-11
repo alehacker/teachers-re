@@ -1,0 +1,25 @@
+
+{{#if user}}
+  <h2>Welcome, {{ user.username }}!</h2>
+  <p>Email: {{user.email}}</p>
+  <p>Grade You Teach: {{user.grade}}</p>
+  <p>Your Subject: {{user.subject}}</p>
+  <button>
+    <a href="/users/profile">Reload the page</a>
+  </button>
+  <br>
+  <button>
+    <a href="/resources/add-resource">Add Resource</a>
+  </button>
+  
+
+{{else}}
+  <p>Still no logged in user, sorry!</p>
+{{/if}}
+
+
+
+
+
+
+

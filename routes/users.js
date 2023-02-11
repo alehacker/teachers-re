@@ -15,10 +15,14 @@ const User = require('../models/User.model')
 /* GET users listing. */
 router.get('/signup', signUp);
 router.post('/signup',validateSignUp);
-// router.get('/login', login(req, res, next) );
-// router.post('/login',validateLogin(req, res, next));
-// router.get('/profile', showProfile(req, res, next) );
-// router.get('/logout', logoutUser(req, res, next));
+router.get('/login', login);
+router.post('/login',validateLogin);
+router.get('/profile', showProfile);
+router.get('/logout', logoutUser);
+
+// ********************************************
+//        Functions for the signUp routes
+// ********************************************
 
 function signUp(req, res, next){
     res.render('auth/signup.hbs');
@@ -64,12 +68,57 @@ function validateSignUp(req, res, next){
     })
 }
 
+// ********************************************
+//        Functions for the login routes
+// ********************************************
 
+function login(req, res, next) {
+    res.render('auth/login.hbs');
+}
 
+function validateLogin(req, res, next) {
+    const { username, password } = req.body;
+    if (!username || !password) {
+        res.render('auth/login.hbs', {
+          errorMessage: 'Please enter both, email and password to login.'
+        });
+        return;
+    }
+    User.findOne({ username })
+    .then(user => {
+        if (!user) {
+          res.render('auth/login.hbs', { errorMessage: 'Email is not registered. Try with other email.' });
+          return;
+        } else if (bcryptjs.compareSync(password, user.password)) {
+            req.session.user = user
+            console.log('SESSION =====> ', req.session);
+            res.redirect('/users/profile');
+        } else {
+          res.render('auth/login.hbs', { errorMessage: 'Incorrect password.' });
+        }
+      })
+    .catch(error => next(error));
+}
 
+// ********************************************
+//       Functions for the profile route
+// ********************************************
 
+function showProfile(req, res, next) {
+    const user = req.session.user
+    console.log('SESSION =====> ', req.session);
+    res.render('users/profile.hbs', {user})
+}
 
+// ********************************************
+//       Functions for the logout route
+// ********************************************
 
-
+function logoutUser(req, res, next) {
+    req.session.destroy(err => {
+        if (err) next(err);
+        res.redirect('/');
+    });
+}
 
 module.exports = router;
