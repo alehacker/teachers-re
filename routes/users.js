@@ -12,7 +12,6 @@ const User = require('../models/User.model')
 //              All User Routes
 // ******************************************
 
-/* GET users listing. */
 router.get('/signup', signUp);
 router.post('/signup',validateSignUp);
 router.get('/login', login);

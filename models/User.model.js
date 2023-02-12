@@ -24,10 +24,12 @@ const userSchema = new Schema(
       required: [true, 'Password is required.']
     },
     grade: {
-        type: String
+        type: String,
+        required: [true, 'Grade is required.']
     },
     subject: {
-        type: String
+        type: String,
+        required: [true, 'Subject is required.']
     }
   },
   {
