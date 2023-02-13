@@ -58,7 +58,7 @@ function showAllResources(req, res, next){
     Resource.find()
     .populate('creator')
     .then((foundResources) => {
-        res.render('../views/resources/allResources.hbs', { foundResources });
+        res.render('resources/allResources.hbs', { foundResources });
     })
     .catch((err) => {
         console.log(err)
