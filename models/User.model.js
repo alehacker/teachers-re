@@ -25,11 +25,11 @@ const userSchema = new Schema(
     },
     grade: {
         type: String,
-        required: [true, 'Grade is required.']
+        enum : ['Kinder','1st', '2nd','3rd', '4th', '5th']
     },
     subject: {
         type: String,
-        required: [true, 'Subject is required.']
+        enum : ['Art', 'Math', 'Music', 'Reading', 'Science','Social Studies', 'Spanish']
     }
   },
   {

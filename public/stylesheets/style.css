@@ -24,6 +24,15 @@ a {
     text-align: center;
     width: 100%;
   }
+
+  form select{
+    color: #666;
+    display: inline-block;
+    margin-bottom: 10px;
+    font-size: 1em;
+    text-align: center;
+    width: 100%;
+  }
    
   form input,
   form button {

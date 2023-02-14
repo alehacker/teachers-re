@@ -18,6 +18,17 @@
   <p>Still no logged in user, sorry!</p>
 {{/if}}
 
+{{#each foundResources}}
+
+    <h2>{{name}}</h2>
+    
+    <p>Description: {{description}}</p>
+    <p>Grade: {{grade}}</p>
+    <p>Subject: {{subject}}</p>
+    <a href="/resources/resource-details/{{_id}}">See details</a>
+
+{{/each}}
+
 
 
 

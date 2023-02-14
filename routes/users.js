@@ -5,7 +5,10 @@ const mongoose = require('mongoose');
 const bcryptjs = require('bcryptjs');
 const saltRounds = 10;
 
+const { isLoggedIn, isLoggedOut, isCreator, isNotCreator} = require('../middleware/route-guard')
+
 const User = require('../models/User.model')
+const Resource = require('../models/Resource.model')
 
 
 // ******************************************
@@ -14,7 +17,7 @@ const User = require('../models/User.model')
 
 router.get('/signup', signUp);
 router.post('/signup',validateSignUp);
-router.get('/login', login);
+router.get('/login', isLoggedIn, login);
 router.post('/login',validateLogin);
 router.get('/profile', showProfile);
 router.get('/logout', logoutUser);
@@ -29,6 +32,10 @@ function signUp(req, res, next){
 
 function validateSignUp(req, res, next){
     const { username, email, password, grade, subject } = req.body;
+    console.log('here is the grade ---->', req.body.grade)
+    console.log('here is the subject ----->', req.body.subject)
+    console.log('*** here are the values', req.body)
+
     if(!username || !email || !password){
         res.render('auth/signup.hbs', 
         {errorMessage: 'All fields are mandatory.  Please Provide username, email and password'})
@@ -105,9 +112,26 @@ function validateLogin(req, res, next) {
 
 function showProfile(req, res, next) {
     const user = req.session.user
-    console.log('SESSION =====> ', req.session);
-    res.render('users/profile.hbs', {user})
+    console.log('SESSION =====> ', req.session.user);
+    Resource.find({
+        creator: user._id
+    })
+        .populate('creator')
+        .then((foundResources) => {
+            res.render('users/profile.hbs', {foundResources, user });
+        })
 }
+
+// function showAllResources(req, res, next){
+//     Resource.find()
+//     .populate('creator')
+//     .then((foundResources) => {
+//         res.render('resources/allResources.hbs', { foundResources });
+//     })
+//     .catch((err) => {
+//         console.log(err)
+//     })
+// }
 
 // ********************************************
 //       Functions for the logout route

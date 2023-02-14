@@ -8,11 +8,30 @@
 <label for="">Description</label>
 <input type="text" name="description" value="{{description}}">
 
+
 <label for="">Grade</label>
-<input type="text" name="grade" value = "{{grade}}">
+{{!-- <input type="text" name="grade" value ={{grade}}> --}}
+   <select name="grade" id="grade">
+        <option value="">Select Grade</option>
+        <option value="kinder">Kinder</option>
+        <option value="1st">1st Grade</option>
+        <option value="2nd">2nd Grade</option>
+        <option value="3rd">3rd Grade</option>
+        <option value="4th">4th Grade</option>
+        <option value="5th">5th Grade</option>
+    </select>
 
 <label for="">Subject</label>
-<input type="text" name="subject" value ={{subject}}>
+   <select name="subject" id="subject">
+        <option value="">Select Subject</option>
+        <option value="Art">Art</option>
+        <option value="Math">Math</option>
+        <option value="Music">Music</option>
+        <option value="Reading">Reading</option>
+        <option value="Science">Science</option>
+        <option value="Social Studies">Spanish</option>  
+    </select>
+{{!-- <input type="text" name="subject" value ={{subject}}> --}}
 
 <label for="">Image</label>
 <input type="text" name="imageUrl" value="{{imageUrl}}">
@@ -20,3 +39,19 @@
 <button type="submit">Edit Resource</button>
 
 </form>
+
+   {{!-- <select name="grade" id="grade">
+        <option value="kinder">Kinder</option>
+        <option value="1st">1st Grade</option>
+        <option value="2nd">2nd Grade</option>
+        <option value="3rd">3rd Grade</option>
+        <option value="4th">4th Grade</option>
+        <option value="5th">5th Grade</option>
+        <option value="6th">6th Grade</option>
+        <option value="7th">7th Grade</option>
+        <option value="8th">8th Grade</option>
+        <option value="9th">9th Grade</option>
+        <option value="10th">10th Grade</option>
+        <option value="11th">11th Grade</option>
+        <option value="12th">12th Grade</option>    
+    </select> --}}

@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 const bcryptjs = require('bcryptjs');
 const saltRounds = 10;
 
+const { isLoggedIn, isLoggedOut, isCreator, isNotCreator} = require('../middleware/route-guard')
+
 const Resource = require('../models/Resource.model')
 const User = require('../models/User.model')
 
@@ -12,13 +14,13 @@ const User = require('../models/User.model')
 //              All Resources Routes
 // ******************************************
 
-router.get('/add-resource', showAddForm);
-router.post('/add-resource', addResource);
+router.get('/add-resource', isLoggedIn, showAddForm);
+router.post('/add-resource', isLoggedIn, addResource);
 router.get('/all-resources', showAllResources);
 router.get('/resource-details/:id', showResourceDetails);
-router.get('/edit-resource/:id', displayEditForm);
-router.post('/edit-resource/:id', editForm);
-router.get('/delete-resource/:id', deleteResource);
+router.get('/edit-resource/:id', isCreator, displayEditForm);
+router.post('/edit-resource/:id', isCreator, editForm);
+router.get('/delete-resource/:id', isCreator, deleteResource);
 router.get('/find-resource', showFindResource);
 router.post('/find-resource', displayFoundResource);
 
@@ -33,13 +35,14 @@ function showAddForm (req, res, next) {
 function addResource(req, res, next) {
     const { name, description, grade, subject,imageUrl } = req.body
 
-    let formattedGrade = grade.toLowerCase()
+    // let formattedGrade = grade.toLowerCase()
+    // let formattedSubject = subject.toLowerCase()
 
 
     Resource.create({
         name,
         description,
-        grade: formattedGrade,
+        grade,
         subject,
         imageUrl, //figure out how to add any other kind of file, and how to handle it
         creator: req.session.user._id
@@ -141,21 +144,19 @@ function showFindResource(req, res, next) {
 
 function displayFoundResource(req, res, next){
     const { name, description, grade, subject, imageUrl} = req.body
-    let formattedGrade = grade.toLowerCase()
+    // let formattedGrade = grade.toLowerCase()
+    // let formattedSubject = subject.toLowerCase()
 
-    console.log('here is the subject', subject)
     //conditional for case if both are filled do somehting here. else Resource line 148
     if (grade && subject){
         Resource.find({ 
-        
             "$and": [
-            {grade: formattedGrade},
+            {grade},
             {subject}
-        ]}
-        
+        ]}  
     )
     .then((foundResource) => {
-        console.log(foundResource)
+        console.log('**** for $and...here is the resource I got***', foundResource)
         res.render('resources/foundResource.hbs', {foundResource})
     })
     .catch((err) =>{
@@ -163,22 +164,19 @@ function displayFoundResource(req, res, next){
     })
     } else {
         Resource.find({ 
-        
             "$or": [
-            {grade: formattedGrade},
+            {grade},
             {subject}
         ]}
     )
-    
     .then((foundResource) => {
-        console.log(foundResource)
+        console.log('**** for $or...here is the resource I got***', foundResource)
         res.render('resources/foundResource.hbs', {foundResource})
     })
     .catch((err) =>{
         console.log("On line 152", err)
     })
-    }
-  
+    } 
 }
 
 
