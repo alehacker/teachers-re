@@ -17,7 +17,7 @@ const Resource = require('../models/Resource.model')
 
 router.get('/signup', signUp);
 router.post('/signup',validateSignUp);
-router.get('/login', isLoggedIn, login);
+router.get('/login', isLoggedOut, login);
 router.post('/login',validateLogin);
 router.get('/profile', showProfile);
 router.get('/logout', logoutUser);
@@ -79,6 +79,7 @@ function validateSignUp(req, res, next){
 // ********************************************
 
 function login(req, res, next) {
+    console.log("made it to 82")
     res.render('auth/login.hbs');
 }
 

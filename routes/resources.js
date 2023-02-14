@@ -7,6 +7,8 @@ const saltRounds = 10;
 
 const { isLoggedIn, isLoggedOut, isCreator, isNotCreator} = require('../middleware/route-guard')
 
+const fileUploader = require('../config/cloudinary.config');
+
 const Resource = require('../models/Resource.model')
 const User = require('../models/User.model')
 
@@ -15,7 +17,7 @@ const User = require('../models/User.model')
 // ******************************************
 
 router.get('/add-resource', isLoggedIn, showAddForm);
-router.post('/add-resource', isLoggedIn, addResource);
+router.post('/add-resource', isLoggedIn, fileUploader.single('imageUrl'), addResource);
 router.get('/all-resources', showAllResources);
 router.get('/resource-details/:id', showResourceDetails);
 router.get('/edit-resource/:id', isCreator, displayEditForm);
@@ -44,7 +46,7 @@ function addResource(req, res, next) {
         description,
         grade,
         subject,
-        imageUrl, //figure out how to add any other kind of file, and how to handle it
+        imageUrl: req.file.path, //figure out how to add any other kind of file, and how to handle it
         creator: req.session.user._id
     })
     .then((newResource) => {

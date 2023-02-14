@@ -1,6 +1,6 @@
 <h2>Add Resource</h2>
 
-<form action="/resources/add-resource" method="post">
+<form action="/resources/add-resource" method="post" enctype="multipart/form-data">
 
 <label for="">Resource Name</label>
 <input type="text" name="name">
@@ -33,8 +33,8 @@
     </select>
 {{!-- <input type="text" name="subject"> --}}
 
-<label for="">Image</label>
-<input type="text" name="imageUrl">
+<label for="">Image/File</label>
+<input type="file" name="imageUrl">
 
 <button type="submit">Add Resource</button>
 
