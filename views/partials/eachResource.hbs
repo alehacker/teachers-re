@@ -1,10 +1,16 @@
 
 <h3>{{name}}</h3>
-<img src="{{imageUrl}}" alt="Resource Image">
+{{!-- <img src="{{imageUrl}}" alt="Resource Image"> --}}
 <p>Description: {{description}}</p>
 <p>Grade: {{grade}}</p>
 <p>Subject: {{subject}}</p>
 
 <p>posted by: {{creator.username}}</p>
+
+<object data="{{imageUrl}}" type="img" width="100%" height="100%">
+  <iframe id="pdf" src="{{imageUrl}}" width="100%" height="100%" style="border: none;">
+   It looks like the browser you are using does not support PDFs.
+  </iframe>
+</object> 
 
 {{!-- Figure out how to display any file that is not an image --}}

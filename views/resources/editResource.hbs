@@ -1,6 +1,6 @@
 <h2>Edit Resource</h2>
 
-<form action="/resources/edit-resource/{{_id}}" method="post">
+<form action="/resources/edit-resource/{{_id}}" method="post" enctype="multipart/form-data">
 
 <label for="">Name</label>
 <input type="text" name="name" value="{{name}}">
@@ -33,8 +33,8 @@
     </select>
 {{!-- <input type="text" name="subject" value ={{subject}}> --}}
 
-<label for="">Image</label>
-<input type="text" name="imageUrl" value="{{imageUrl}}">
+<label for="">Image/File</label>
+<input type="file" name="imageUrl">
 
 <button type="submit">Edit Resource</button>
 

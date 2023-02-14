@@ -21,7 +21,7 @@ router.post('/add-resource', isLoggedIn, fileUploader.single('imageUrl'), addRes
 router.get('/all-resources', showAllResources);
 router.get('/resource-details/:id', showResourceDetails);
 router.get('/edit-resource/:id', isCreator, displayEditForm);
-router.post('/edit-resource/:id', isCreator, editForm);
+router.post('/edit-resource/:id', isCreator, fileUploader.single('imageUrl'), editForm);
 router.get('/delete-resource/:id', isCreator, deleteResource);
 router.get('/find-resource', showFindResource);
 router.post('/find-resource', displayFoundResource);
@@ -46,7 +46,7 @@ function addResource(req, res, next) {
         description,
         grade,
         subject,
-        imageUrl: req.file.path, //figure out how to add any other kind of file, and how to handle it
+        imageUrl: req.file.path, //This was done with Cloudinary
         creator: req.session.user._id
     })
     .then((newResource) => {
@@ -87,6 +87,8 @@ function showResourceDetails(req, res, next){
         console.log(err)
     })
 }
+//Found that to pull the url from cloudinary
+// String url = cloudinary.url().format("jpg").generate("sample");
 
 // ********************************************
 //    Functions for the Edit-Resource routes
@@ -218,7 +220,12 @@ function displayFoundResource(req, res, next){
 
 
 
-
+//**To display a pdf file it will have to be modified
+// {/* <object data="/pdf/file1.pdf" type="img" width="100%" height="100%">
+//   <iframe src="/pdf/file1.pdf" width="100%" height="100%" style="border: none;">
+//    It looks like the browser you are using does not support PDFs. However, you can still download my resume to view it: <a href="/pdf/file1.pdf">Download PDF</a>
+//   </iframe>
+// </object>  */}
 
 
 

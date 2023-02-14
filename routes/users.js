@@ -15,12 +15,12 @@ const Resource = require('../models/Resource.model')
 //              All User Routes
 // ******************************************
 
-router.get('/signup', signUp);
+router.get('/signup', isLoggedOut, signUp);
 router.post('/signup',validateSignUp);
 router.get('/login', isLoggedOut, login);
 router.post('/login',validateLogin);
-router.get('/profile', showProfile);
-router.get('/logout', logoutUser);
+router.get('/profile', isLoggedIn, showProfile);
+router.get('/logout',  logoutUser);
 
 // ********************************************
 //        Functions for the signUp routes
