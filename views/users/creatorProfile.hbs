@@ -1,0 +1,17 @@
+
+  <h2>{{ foundUser.username }}</h2>
+  <p>Email: {{foundUser.email}}</p>
+  <p>Grade: {{foundUser.grade}}</p>
+  <p>Subject: {{foundUser.subject}}</p>
+
+
+{{#each foundResources}}
+
+    <h2>{{name}}</h2>
+    
+    <p>Description: {{description}}</p>
+    <p>Grade: {{grade}}</p>
+    <p>Subject: {{subject}}</p>
+    <a href="/resources/resource-details/{{_id}}">See details</a>
+
+{{/each}}

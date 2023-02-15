@@ -19,7 +19,8 @@ router.get('/signup', isLoggedOut, signUp);
 router.post('/signup',validateSignUp);
 router.get('/login', isLoggedOut, login);
 router.post('/login',validateLogin);
-router.get('/profile', isLoggedIn, showProfile);
+router.get('/profile', showProfile);
+router.get('/creator-profile/:id', showCreatorProfile);
 router.get('/logout',  logoutUser);
 
 // ********************************************
@@ -59,7 +60,7 @@ function validateSignUp(req, res, next){
     .then(newUser => {
         console.log('Newly created user is: ', newUser);
         //I need to decide where to redirect...Maybe profile
-        res.redirect('/')  
+        res.redirect('/users/login')  
     })
     .catch(error => {
         if (error instanceof mongoose.Error.ValidationError) {
@@ -144,5 +145,28 @@ function logoutUser(req, res, next) {
         res.redirect('/');
     });
 }
+
+// ***********************************************
+//  Functions for Show Resource Creator Profile
+// ***********************************************
+
+function showCreatorProfile(req, res, next){
+    console.log('This is the creators id ---->', req.params.id)
+    let author = req.params.id
+    let user
+    User.findById(author)
+    .then((foundUser) => {
+        Resource.find({
+            creator: req.params.id
+        })
+        .populate('creator')
+        .then((foundResources) => {
+                console.log('here is the creators info ===>', foundUser)
+                res.render('users/creatorProfile.hbs', {foundResources, foundUser });
+        })
+
+    })
+}
+
 
 module.exports = router;

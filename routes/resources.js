@@ -160,6 +160,11 @@ function displayFoundResource(req, res, next){
         ]}  
     )
     .then((foundResource) => {
+        if (!foundResource){
+            res.send('')
+        }
+    })
+    .then((foundResource) => {
         console.log('**** for $and...here is the resource I got***', foundResource)
         res.render('resources/foundResource.hbs', {foundResource})
     })
@@ -178,7 +183,7 @@ function displayFoundResource(req, res, next){
         res.render('resources/foundResource.hbs', {foundResource})
     })
     .catch((err) =>{
-        console.log("On line 152", err)
+        console.log(err)
     })
     } 
 }
