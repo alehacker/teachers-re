@@ -1,19 +1,18 @@
-
-<h3>{{name}}</h3>
-{{!-- <img src="{{imageUrl}}" alt="Resource Image"> --}}
-<p>Description: {{description}}</p>
-<p>Grade: {{grade}}</p>
-<p>Subject: {{subject}}</p>
-
-<a href="/users/creator-profile/{{creator._id}}">posted by: {{creator.username}}</a>
-
-{{!-- <p>posted by: {{creator.username}}</p> --}}
-
-<object data="{{imageUrl}}" type="img" width="100%" height="100%">
-  <iframe id="pdf" src="{{imageUrl}}" width="100%" height="100%" style="border: none;">
-   It looks like the browser you are using does not support PDFs.
-  </iframe>
-</object> 
-
-{{!-- Figure out how to display any file that is not an image --}}
+<div class="resource-container">
+    <div class="resource-details">
+        <h3>{{name}}</h3>
+        <p>Description: {{description}}</p>
+        <p>Grade: {{grade}}</p>
+        <p>Subject: {{subject}}</p>
+        <a href="/users/creator-profile/{{creator._id}}">posted by: {{creator.username}}</a>
+    </div>
+    <div class="resource-image">
+        <object class ="cloud-img" data="{{imageUrl}}" width="100%" height="100%" type="img">
+            <iframe id="pdf" src="{{imageUrl}}" height="100%">
+                It looks like the browser you are using does not support PDFs.
+            </iframe>
+        </object>
+        <br>
+    </div>
+</div>
 

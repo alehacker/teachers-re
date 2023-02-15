@@ -26,7 +26,7 @@ const isCreator = (req, res, next) => {
     .populate('creator')
     .then((foundResource) => {
         if (!req.session.user || foundResource.creator._id.toString() !== req.session.user._id) {
-            res.render('index.hbs', {errorMessage: "You are not authorized."})
+            res.render('auth/login.hbs', {errorMessage: "Edit/Delete Your own resources.  Please login"})
         } else {
             next()
         }

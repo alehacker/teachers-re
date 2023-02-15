@@ -1,14 +1,13 @@
-<h2>All Resources</h2>
+<h1>All Resources</h1>
 
-{{#each foundResources}}
-
-
-    <h2>{{name}}</h2>
-    
-    <p>Description: {{description}}</p>
-    <p>Grade: {{grade}}</p>
-    <p>Subject: {{subject}}</p>
-    <a href="/resources/resource-details/{{_id}}">See details</a>
-
-{{/each}}
-
+<div class="resource-grid">
+    {{#each foundResources}}
+        <div class="resource-card">
+            <h2>{{name}}</h2>
+            <p>Description: {{description}}</p>
+            <p>Grade: {{grade}}</p>
+            <p>Subject: {{subject}}</p>
+            <a href="/resources/resource-details/{{_id}}">See details</a>
+        </div>
+    {{/each}}
+</div>

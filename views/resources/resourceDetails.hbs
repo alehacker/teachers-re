@@ -1,9 +1,11 @@
-<h2>Resource Details</h2>
-{{>eachResource}}
-
-<a href="/resources/edit-resource/{{_id}}"><button>Edit</button></a>
-
-<a href="/resources/delete-resource/{{_id}}"><button>Delete</button></a>
+<div>
+    <h2>Resource Details</h2>
+    {{>eachResource}}
+    <div>
+        <a href="/resources/edit-resource/{{_id}}"><button>Edit</button></a>
+        <a href="/resources/delete-resource/{{_id}}"><button>Delete</button></a>
+    </div>
+</div>
 
 {{!-- <form action="/rooms/add-review/{{_id}}" method="post">
     <label for="">New Comment</label>

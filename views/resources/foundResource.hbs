@@ -1,12 +1,16 @@
 <h2>Search Results</h2>
-{{#each foundResource}}
+<div class="resource-grid">
+    {{#each foundResource}}
+        <div class="resource-card">
+            <h2>{{name}}</h2>
+            <p>Description: {{description}}</p>
+            <p>Grade: {{grade}}</p>
+            <p>Subject: {{subject}}</p>
+            <a href="/resources/resource-details/{{_id}}">See details</a>
+        </div>
+    {{/each}}
+</div>
 
 
-    <h2>{{name}}</h2>
-    
-    <p>Description: {{description}}</p>
-    <p>Grade: {{grade}}</p>
-    <p>Subject: {{subject}}</p>
-    <a href="/resources/resource-details/{{_id}}">See details</a>
 
-{{/each}}
+
