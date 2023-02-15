@@ -26,6 +26,10 @@
     <button type="submit">Search</button>
 </form>
 
+{{#if errorMessage}}
+        <p class="error">{{errorMessage}}</p class="error">
+{{/if}}
+
 {{!-- <label for="">Grade</label> --}}
 {{!-- <input type="text" name="grade" placeholder="Grade"> --}}
 {{!-- <input type="text" name="subject" placeholder="Subject"> --}}

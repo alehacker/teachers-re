@@ -6,6 +6,7 @@ const Resource = require('../models/Resource.model')
 const isLoggedIn = (req, res, next) => {
     if (!req.session.user) {
       return res.redirect('/users/login');
+    //   res.render('resources/findResource.hbs', {errorMessage: 'No Resources Found.  Try Again'})
     }
     next();
   };

@@ -19,7 +19,7 @@ router.get('/signup', isLoggedOut, signUp);
 router.post('/signup',validateSignUp);
 router.get('/login', isLoggedOut, login);
 router.post('/login',validateLogin);
-router.get('/profile', showProfile);
+router.get('/profile', isLoggedIn, showProfile);
 router.get('/creator-profile/:id', showCreatorProfile);
 router.get('/logout',  logoutUser);
 
@@ -88,14 +88,14 @@ function validateLogin(req, res, next) {
     const { username, password } = req.body;
     if (!username || !password) {
         res.render('auth/login.hbs', {
-          errorMessage: 'Please enter both, email and password to login.'
+          errorMessage: 'Please enter both, username and password to login.'
         });
         return;
     }
     User.findOne({ username })
     .then(user => {
         if (!user) {
-          res.render('auth/login.hbs', { errorMessage: 'Email is not registered. Try with other email.' });
+          res.render('auth/login.hbs', { errorMessage: 'username does not exist.' });
           return;
         } else if (bcryptjs.compareSync(password, user.password)) {
             req.session.user = user

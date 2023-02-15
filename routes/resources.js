@@ -148,8 +148,6 @@ function showFindResource(req, res, next) {
 
 function displayFoundResource(req, res, next){
     const { name, description, grade, subject, imageUrl} = req.body
-    // let formattedGrade = grade.toLowerCase()
-    // let formattedSubject = subject.toLowerCase()
 
     //conditional for case if both are filled do somehting here. else Resource line 148
     if (grade && subject){
@@ -160,16 +158,14 @@ function displayFoundResource(req, res, next){
         ]}  
     )
     .then((foundResource) => {
-        if (!foundResource){
-            res.send('')
+        if (!foundResource.length) {
+            res.render('resources/findResource.hbs', {errorMessage: 'No Resources Found.  Try Again'})
         }
-    })
-    .then((foundResource) => {
         console.log('**** for $and...here is the resource I got***', foundResource)
         res.render('resources/foundResource.hbs', {foundResource})
     })
     .catch((err) =>{
-        console.log("On line 152", err)
+        console.log(err)
     })
     } else {
         Resource.find({ 
@@ -179,6 +175,9 @@ function displayFoundResource(req, res, next){
         ]}
     )
     .then((foundResource) => {
+        if (!foundResource.length) {
+            res.render('resources/findResource.hbs', {errorMessage: 'No Resources Found.  Try Again'})
+        }
         console.log('**** for $or...here is the resource I got***', foundResource)
         res.render('resources/foundResource.hbs', {foundResource})
     })
@@ -187,55 +186,6 @@ function displayFoundResource(req, res, next){
     })
     } 
 }
-
-
-// function displayFoundResource(req, res, next){
-//     const { name, description, grade, subject, imageUrl} = req.query
-//     console.log(req)
-//     console.log(req.query)
-//     console.log('here is the subject', subject)
-    // Resource.find(subject)  
-    //     //     "$or" :[
-    // //         {grade},
-    // //         {subject}
-    // //     ]
-    // // })
-    // .then((foundResource) => {
-    //     res.render('resources/foundResource.hbs', {foundResource})
-    // })
-    // .catch((err) =>{
-    //     console.log(err)
-    // })
-// }
-
-// app.get("/search", (req, res) => {
-//     const query = req.query.q;
-    
-//     // query the database for the search results
-//     const results = getResultsFromDatabase(query);
-    
-//     // send the results back to the client
-//     res.send(results);
-//   });
-
-//   app.get("/", (req, res) => {
-//     res.sendFile(__dirname + "/index.html");
-//   });
-//Model.find(subject: req.body.subject)
-
-
-
-//**To display a pdf file it will have to be modified
-// {/* <object data="/pdf/file1.pdf" type="img" width="100%" height="100%">
-//   <iframe src="/pdf/file1.pdf" width="100%" height="100%" style="border: none;">
-//    It looks like the browser you are using does not support PDFs. However, you can still download my resume to view it: <a href="/pdf/file1.pdf">Download PDF</a>
-//   </iframe>
-// </object>  */}
-
-
-
-
-
 
 
 
