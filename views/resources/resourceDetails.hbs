@@ -1,17 +1,42 @@
-<div>
+{{!-- <div>
     <h2>Resource Details</h2>
     {{>eachResource}}
     <div>
-        <a href="/resources/edit-resource/{{_id}}"><button>Edit</button></a>
-        <a href="/resources/delete-resource/{{_id}}"><button>Delete</button></a>
+        <button class="other-buttons">
+            <a href="/resources/edit-resource/{{_id}}">Edit</a>
+        </button>
+
+        <button class="other-buttons">
+            <a href="/resources/delete-resource/{{_id}}">Delete</a>
+        </button>
+
+        
+    </div>
+</div> --}}
+<h2>Resource Details</h2>
+<div class="resource-container">
+    <div class="resource-details">
+        <h3>{{name}}</h3>
+        <p>Description: {{description}}</p>
+        <p>Grade: {{grade}}</p>
+        <p>Subject: {{subject}}</p>
+        <a href="/users/creator-profile/{{creator._id}}">posted by: {{creator.username}}</a>
+        <br>
+    
+        <button class="other-buttons">
+            <a href="/resources/edit-resource/{{_id}}">Edit</a>
+        </button>
+
+        <button class="other-buttons">
+            <a href="/resources/delete-resource/{{_id}}">Delete</a>
+        </button>
+    </div>
+    <div class="resource-image">
+        <object class ="cloud-img" data="{{imageUrl}}" width="100%" height="100%" type="img">
+            <iframe id="pdf" src="{{imageUrl}}" >
+                It looks like the browser you are using does not support PDFs.
+            </iframe>
+        </object>
+        <br>
     </div>
 </div>
-
-{{!-- <form action="/rooms/add-review/{{_id}}" method="post">
-    <label for="">New Comment</label>
-    <input type="text" name="comment">
-
-    <button type="submit">Add Comment</button>
-
-</form> --}}
-
