@@ -5,7 +5,8 @@ const Resource = require('../models/Resource.model')
 // checks if the user is logged in when trying to access a specific page
 const isLoggedIn = (req, res, next) => {
     if (!req.session.user) {
-      return res.redirect('/users/login');
+    //   return res.redirect('/users/login');
+    res.render('auth/login.hbs', {errorMessage: "You need to login to perform this action"})
     //   res.render('resources/findResource.hbs', {errorMessage: 'No Resources Found.  Try Again'})
     }
     next();
