@@ -23,6 +23,16 @@ const storage = new CloudinaryStorage({
     // => this is in case you want to upload other type of files, not just images
   }
 });
+
+//The following lines of code takes a word document and turns it into a pdf
+// cloudinary.uploader.upload("path/to/word/document.docx", {
+//     resource_type: "raw",
+//     format: "pdf"
+//   }, function(result) {
+//     console.log(result);
+//   });
+  
+
  
 //                     storage: storage
 module.exports = multer({ storage });
