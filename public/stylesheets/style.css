@@ -5,31 +5,35 @@ body {
   background-color: #ECF9FF;
 }
 
-
 .wrapper {
     min-height: 90vh;
     display: flex;
     flex-direction: column;
 }
 
-.cover-container{
-    min-height: 90vh;
+.cover-container {
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
-}
-
-.cover-left {
+    height: 80vh;
+    gap: 0;
+  }
+  
+.cover-top {
+    margin-right: 1rem;
     position: relative;
     height: 90vh;
     width: 90vw;
 }
-.cover-left img {
+.cover-top img {
+    max-width: 100%;
     position: absolute;
-    top: 20px;
-    left: 60px;
-    /* bottom: 15px; */
-    height: 90%;
-    width: 100%;
+    top: 10px;
+    left: 70px;
+    bottom: 0px;
+    height: 95%;
+    width: 90%;
     object-fit: cover;
 }
 .cover-btn{
@@ -47,6 +51,7 @@ body {
     font-weight: bold;
     cursor: pointer;
     text-transform: uppercase;
+    border: #6276C3;
 }
 .cover-btn:hover{
     background: #7286D3; 
