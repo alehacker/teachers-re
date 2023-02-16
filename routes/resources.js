@@ -76,17 +76,34 @@ function showAllResources(req, res, next){
 // ********************************************
 //   Functions for the Resource-Details route
 // ********************************************
-
 function showResourceDetails(req, res, next){
     Resource.findById(req.params.id)
     .populate('creator')
     .then((foundResource) => {
-        res.render('resources/resourceDetails.hbs', foundResource)
+        let urlArray = foundResource.imageUrl.split('.')
+        let extension = urlArray[urlArray.length-1]
+        if (extension === 'jpg' || extension === 'jpeg' || extension === 'png') {
+            res.render('resources/resourceDetailsImage.hbs', foundResource)
+        } else {
+
+            res.render('resources/resourceDetails.hbs', foundResource)
+        }
     })
     .catch((err) => {
         console.log(err)
     })
 }
+// function showResourceDetails(req, res, next){
+//     Resource.findById(req.params.id)
+//     .populate('creator')
+//     .then((foundResource) => {
+//         res.render('resources/resourceDetails.hbs', foundResource)
+//     })
+//     .catch((err) => {
+//         console.log(err)
+//     })
+// }
+
 //Found that to pull the url from cloudinary
 // String url = cloudinary.url().format("jpg").generate("sample");
 
